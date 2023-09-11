@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="tyle.css">
+</head>
+<body>
+<h1>АЯНА, ТЫ САМАЯ <span>...</span>, ЛЮБЛЮ ТЕБЯ</h1>
+
+<button class="btn-hover color-11 btn">нажми и узнаешь</button>
+<script>
+    const btn=document.querySelector('.btn')
+    const span=document.querySelector('span')
+    const list =["Прекрасная", "сексуальная", "Очаровательная", "Обаятельная", "Элегантная", "Утонченная", "Ангельская", "Страстная", "Светлая", "Великолепная", "Вдохновляющая", "Умная", "Талантливая", "Ответственная", "Добрая", "Ласковая", "Заботливая", "Смешная", "Жизнерадостная", "Улыбчивая", "Оптимистичная", "Стойкая", "Сильная", "Нежная", "Стремительная", "Креативная", "Исключительная", "Чувственная", "Соблазнительная", "Амбициозная", "Уверенная", "Решительная", "Активная", "Яркая", "Целеустремленная", "Дружелюбная", "Открытая", "Энергичная", "Независимая", "Завораживающая", "Женственная", "Привлекательная", "Честная", "Справедливая", "Грациозная", "Мудрая", "Образованная", "Деликатная", "Понимающая", "Вдохновенная", "Благородная", "Добросердечная", "Радужная", "Искренняя", "Добродетельная", "Примирительная", "Позитивная", "Умопомрачительная", "Уникальная", "Стройная", "Здоровая", "Бодрая", "Непревзойденная", "Манящая", "Обворожительная", "Внимательная", "Невероятная", "Интеллигентная", "Пылкая", "Любознательная", "Чуткая", "Веселая", "Сияющая", "Вкусная", "Игривая", "Романтичная", "Уникальная", "Виртуозная", "Надежная", "Загадочная", "Атлетичная", "Харизматичная", "Жизнелюбивая", "Особенная", "Невероятная", "Чарующая", "Несравненная", "Забавная", "Эффектная", "Преданная", "Радушная", "Искрометная", "Нежная", "Заботящаяся", "Разносторонняя", "Властная", "Искусительная", "Верная", "Мягкая", "Благодарная"]
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    // Функция для отображения случайного слова
+    function displayRandomWord() {
+        const randomIndex = getRandomInt(list.length);
+        const randomWord = list[randomIndex];
+        const randomColor=`#${(Math.random().toString(16) + '000000').substring(2,8).toUpperCase()}`
+        span.style.color=randomColor
+        span.style.textShadow=`3px 1px 10px ${randomColor}`
+        span.textContent = randomWord;
+
+        // Сохраняем слово в локальное хранилище
+        localStorage.setItem("randomWord", randomWord);
+        localStorage.setItem("randomColor", randomColor);
+    }
+
+    // Проверяем, есть ли сохраненное слово в локальном хранилище
+    const savedWord = localStorage.getItem("randomWord");
+    const savedColor = localStorage.getItem("randomColor");
+
+    if (savedWord) {
+        span.textContent = savedWord;
+        span.style.color = savedColor;
+    } else {
+        displayRandomWord();
+    }
+
+    // Обработчик события для кнопки
+    btn.addEventListener("click", displayRandomWord);
+</script>
+</body>
+</html>
